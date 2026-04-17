@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre mí</title>
+
+<link rel="icon" type="image/png" href="img/briefcase.png">
+<link rel="stylesheet" href="style/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script>
+if(localStorage.getItem("mode")==="light"){
+  document.body?.classList.add("light");
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Portafolio</h1>
+
+  <nav>
+    <a href="index.php">Home</a>
+    <a href="about.php">About</a>
+    <a href="skills.php">Skills</a>
+  </nav>
+
+  <div class="header-right">
+    <span class="toggle" id="themeToggle">
+      <i class="fa-solid fa-moon"></i>
+    </span>
+
+    <a href="docs/CV.pdf" download class="btn btn-cv">
+      Descargar CV
+    </a>
+
+    <span class="menu-btn" id="menuBtn">
+      <i class="fa-solid fa-bars"></i>
+    </span>
+  </div>
+</header>
+
+<div class="sidebar" id="sidebar">
+  <a href="index.php">Home</a>
+  <a href="about.php">About</a>
+  <a href="skills.php">Skills</a>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<section class="about-section">
+
+  <div class="about-container">
+
+    <h1 class="about-title">Sobre mí</h1>
+
+    <p class="about-text">
+      Soy desarrollador de software con enfoque en la creación de soluciones prácticas y eficientes.
+      Me apasiona construir sistemas que automaticen procesos, mejoren la productividad y resuelvan problemas reales.
+      <br><br>
+      Tengo experiencia en desarrollo web, integración de sistemas y automatización de flujos,
+      combinando tecnologías modernas para crear aplicaciones funcionales y bien estructuradas.
+      <br><br>
+      Disfruto trabajar tanto en frontend como backend, cuidando siempre la experiencia del usuario
+      y la calidad del código.
+    </p>
+
+    <a href="index.php" class="back-link">← Volver al inicio</a>
+
+  </div>
+
+</section>
+
+<script>
+
+const icon = document.querySelector('.toggle i');
+
+if(localStorage.getItem("mode") === "light"){
+  document.body.classList.add("light");
+  icon.classList.replace('fa-moon','fa-sun');
+}
+
+document.getElementById("themeToggle").addEventListener("click", ()=>{
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+
+  icon.classList.toggle('fa-sun', isLight);
+  icon.classList.toggle('fa-moon', !isLight);
+
+  localStorage.setItem("mode", isLight ? "light" : "dark");
+});
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+document.getElementById("menuBtn").onclick = ()=>{
+  sidebar.classList.add('active');
+  overlay.classList.add('active');
+};
+
+overlay.onclick = ()=>{
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+};
+
+document.addEventListener('keydown',e=>{
+  if(e.key==="Escape"){
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+});
+
+</script>
+
+</body>
+</html>
